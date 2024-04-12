@@ -17,8 +17,8 @@ services:
       - "636:636"
     restart: unless-stopped
     volumes:
-      - ${OPENLDAP_DATA_PATH}:/var/lib/openldap/openldap-data
-      - ${SLAPD_PATH}:/etc/openldap/slapd.d
+      - ${OPENLDAP_DATA_PATH:-/opt/dcm4chee-arc/openldap-data}:/var/lib/openldap/openldap-data
+      - ${SLAPD_PATH:-/opt/dcm4chee-arc/slapd.d}:/etc/openldap/slapd.d
   mariadb:
     image: mariadb
     env_file:
@@ -35,7 +35,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-      - ${MARIADB_PATH}:/var/lib/mysql
+      - ${MARIADB_PATH:-/opt/dcm4chee-arc/mysql}:/var/lib/mysql
   keycloak:
     image: dcm4che/keycloak:23.0.3
     env_file:
@@ -57,7 +57,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-      - ${KEYCLOAK_PATH}:/opt/keycloak/data
+      - ${KEYCLOAK_PATH:-/opt/dcm4chee-arc/keycloak}:/opt/keycloak/data
   db:
     image: dcm4che/postgres-dcm4chee:15.4-31
     env_file:
@@ -74,7 +74,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-      - ${POSTGRES_PATH}:/var/lib/postgresql/data
+      - ${POSTGRES_PATH:-/opt/dcm4chee-arc/db}:/var/lib/postgresql/data
   arc:
     image: dcm4che/dcm4chee-arc-psql:5.31.2-secure-ui
     env_file:
@@ -100,8 +100,8 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-      - ${WILDFLY_PATH}:/opt/wildfly/standalone
-      - ${PACS_STORAGE_PATH}:/storage
+      - ${WILDFLY_PATH:-/opt/dcm4chee-arc/wildfly}:/opt/wildfly/standalone
+      - ${PACS_STORAGE_PATH:-/opt/dcm4chee-arc/storage}:/storage
 
 networks:
   arc-net:
