@@ -4,7 +4,8 @@ services:
   ldap:
     image: dcm4che/slapd-dcm4chee:2.6.5-31.2
     env_file:
-      - .env
+      - common.env
+      - ldap.env
     logging:
       driver: json-file
       options:
