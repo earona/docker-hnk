@@ -57,7 +57,7 @@ services:
     image: dcm4che/postgres-dcm4chee:15.4-31
     env_file:
       - common.env
-      - dbs.env
+      - db.env
     logging:
       driver: json-file
       options:
