@@ -83,7 +83,7 @@ services:
     env_file:
       - common.env
       - arc.env
-      - .env
+     # - .env
     networks:
       - arc-net
     ports:
