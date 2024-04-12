@@ -3,7 +3,8 @@ services:
   ldap:
     image: dcm4che/slapd-dcm4chee:2.6.5-31.2
     env_file:
-      - .env
+      - common.env
+      - ldap.env
     logging:
       driver: json-file
       options:
@@ -18,7 +19,8 @@ services:
   mariadb:
     image: mariadb
     env_file:
-      - .env
+      - common.env
+      - mariadb.env
     logging:
       driver: json-file
       options:
@@ -33,7 +35,8 @@ services:
   keycloak:
     image: dcm4che/keycloak:23.0.3
     env_file:
-      - .env
+      - common.env
+      - keycloak.env
     logging:
       driver: json-file
       options:
@@ -53,7 +56,8 @@ services:
   db:
     image: dcm4che/postgres-dcm4chee:15.4-31
     env_file:
-      - .env
+      - common.env
+      - dbs.env
     logging:
       driver: json-file
       options:
