@@ -59,8 +59,10 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - ${KEYCLOAK_PATH:-/opt/dcm4chee-arc/keycloak}:/opt/keycloak/data
   db:
-    image: dcm4che/postgres-dcm4chee:15.4-31
+    image: dcm4che/postgres-dcm4chee:16.2-32
     env_file:
+      - ./common.env
+      - ./db.env
       - .envx
     logging:
       driver: json-file

@@ -40,13 +40,13 @@ POSTGRES_DB=pacsdb
 POSTGRES_USER=pacs
 POSTGRES_PASSWORD=pacs.2024
 
-#ARC
-POSTGRES_DB=pacsdb
-POSTGRES_USER=pacs
-POSTGRES_PASSWORD=pacs.2024
-AUTH_SERVER_URL=https://keycloak:8843
-UI_AUTH_SERVER_URL=https://172.17.101.202:8843
-WILDFLY_CHOWN=/storage
+# #ARC
+# POSTGRES_DB=pacsdb
+# POSTGRES_USER=pacs
+# POSTGRES_PASSWORD=pacs.2024
+# AUTH_SERVER_URL=https://keycloak:8843
+# UI_AUTH_SERVER_URL=https://172.17.101.202:8843
+# WILDFLY_CHOWN=/storage
 
 
 # ###PATHS
@@ -59,9 +59,9 @@ PACS_STORAGE_PATH=/var/local/dcm4chee-arc/storage
 WILDFLY_PATH=/var/local/dcm4chee-arc/wildfly
 
 ###WEASIS
-QIDO=https://${ARCHIVE_HOST}:8443
-WEASIS_COMMAND='$dicom:rs'
+# QIDO=https://${ARCHIVE_HOST}:8443
+# WEASIS_COMMAND='$dicom:rs'
 
-IID_PATIENT_URL=weasis://$$dicom:rs --url "${QIDO}{{qidoBasePath}}" -r "patientID={{patientID}}" --query-ext "\&includedefaults=false" -H "Authorization: Bearer {{access_token}}"
-IID_STUDY_URL=weasis://${WEASIS_COMMAND} --url "${QIDO}{{qidoBasePath}}" -r "studyUID={{studyUID}}" --query-ext "\&includedefaults=false" -H "Authorization: Bearer {{access_token}}"
-IID_URL_TARGET=_self
+# IID_PATIENT_URL=weasis://$$dicom:rs --url "${QIDO}{{qidoBasePath}}" -r "patientID={{patientID}}" --query-ext "\&includedefaults=false" -H "Authorization: Bearer {{access_token}}"
+# IID_STUDY_URL=weasis://${WEASIS_COMMAND} --url "${QIDO}{{qidoBasePath}}" -r "studyUID={{studyUID}}" --query-ext "\&includedefaults=false" -H "Authorization: Bearer {{access_token}}"
+# IID_URL_TARGET=_self
