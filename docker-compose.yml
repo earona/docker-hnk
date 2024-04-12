@@ -1,4 +1,4 @@
-name: HNK
+name: hospital_nestor_kirchner
 
 services:
   ldap:
