@@ -1,0 +1,92 @@
+version: "3.3"
+services:
+  ldap:
+    image: dcm4che/slapd-dcm4chee:2.6.5-31.2
+    env_file:
+      - .env
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+    ports:
+      - "389:389"
+      - "636:636"
+    restart: unless-stopped
+    volumes:
+      - ${OPENLDAP_DATA_PATH}:/var/lib/openldap/openldap-data
+      - ${SLAPD_PATH}:/etc/openldap/slapd.d
+  mariadb:
+    image: mariadb
+    env_file:
+      - .env
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - ${MARIADB_PATH}:/var/lib/mysql
+  keycloak:
+    image: dcm4che/keycloak:23.0.3
+    env_file:
+      - .env
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+    ports:
+      - "8843:8843"
+    environment:
+      KEYCLOAK_WAIT_FOR: ldap:389 mariadb:3306
+    restart: unless-stopped
+    depends_on:
+      - ldap
+      - mariadb
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - ${KEYCLOAK_PATH}:/opt/keycloak/data
+  db:
+    image: dcm4che/postgres-dcm4chee:15.4-31
+    env_file:
+      - .env
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - ${POSTGRES_PATH}:/var/lib/postgresql/data
+  arc:
+    image: dcm4che/dcm4chee-arc-psql:5.31.2-secure-ui
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+      - "9990:9990"
+      - "9993:9993"
+      - "11112:11112"
+      - "2762:2762"
+      - "2575:2575"
+      - "12575:12575"
+    environment:
+      WILDFLY_WAIT_FOR: ldap:389 db:5432 keycloak:8843
+    restart: unless-stopped
+    depends_on:
+      - ldap
+      - keycloak
+      - db
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - ${WILDFLY_PATH}:/opt/wildfly/standalone
+      - ${PACS_STORAGE_PATH}:/storage
