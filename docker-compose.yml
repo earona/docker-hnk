@@ -72,6 +72,8 @@ services:
   arc:
     image: dcm4che/dcm4chee-arc-psql:5.31.2-secure-ui
     env_file:
+      - common.env
+      - arc.env
       - .env
     ports:
       - "8080:8080"
@@ -94,3 +96,13 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - ${WILDFLY_PATH}:/opt/wildfly/standalone
       - ${PACS_STORAGE_PATH}:/storage
+
+networks:
+  default:
+    name: arc-net
+    ipam:
+          driver: default
+          config:
+            - subnet: 192.168.255.0/24
+              ip_range: 192.168.255.0/24
+              gateway: 192.168.255.254
