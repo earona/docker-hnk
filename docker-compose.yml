@@ -22,7 +22,7 @@ services:
   mariadb:
     image: mariadb
     env_file:
-      - .env
+      - .envx
     logging:
       driver: json-file
       options:
@@ -39,7 +39,7 @@ services:
   keycloak:
     image: dcm4che/keycloak:23.0.3
     env_file:
-      - .env
+      - .envx
     logging:
       driver: json-file
       options:
@@ -61,7 +61,7 @@ services:
   db:
     image: dcm4che/postgres-dcm4chee:15.4-31
     env_file:
-      - .env
+      - .envx
     logging:
       driver: json-file
       options:
@@ -78,7 +78,7 @@ services:
   arc:
     image: dcm4che/dcm4chee-arc-psql:5.31.2-secure-ui
     env_file:
-      - .env
+      - .envx
     networks:
       - arc-net
     ports:
