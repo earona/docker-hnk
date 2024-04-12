@@ -63,7 +63,6 @@ services:
     env_file:
       - ./common.env
       - ./db.env
-      - .envx
     logging:
       driver: json-file
       options:
