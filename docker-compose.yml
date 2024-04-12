@@ -1,4 +1,5 @@
-version: "3.3"
+name: HNK
+
 services:
   ldap:
     image: dcm4che/slapd-dcm4chee:2.6.5-31.2
@@ -9,6 +10,8 @@ services:
       driver: json-file
       options:
         max-size: "10m"
+    networks:
+      - arc-net
     ports:
       - "389:389"
       - "636:636"
@@ -25,6 +28,8 @@ services:
       driver: json-file
       options:
         max-size: "10m"
+    networks:
+      - arc-net
     ports:
       - "3306:3306"
     restart: unless-stopped
@@ -41,6 +46,8 @@ services:
       driver: json-file
       options:
         max-size: "10m"
+    networks:
+      - arc-net
     ports:
       - "8843:8843"
     environment:
@@ -62,6 +69,8 @@ services:
       driver: json-file
       options:
         max-size: "10m"
+    networks:
+      - arc-net
     ports:
       - "5432:5432"
     restart: unless-stopped
@@ -75,6 +84,8 @@ services:
       - common.env
       - arc.env
       - .env
+    networks:
+      - arc-net
     ports:
       - "8080:8080"
       - "8443:8443"
@@ -98,7 +109,7 @@ services:
       - ${PACS_STORAGE_PATH}:/storage
 
 networks:
-  default:
+  arc-net:
     name: arc-net
     ipam:
           driver: default
