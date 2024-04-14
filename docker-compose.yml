@@ -4,7 +4,6 @@ services:
   ldap:
     image: dcm4che/slapd-dcm4chee:2.6.5-31.2
     env_file:
-      - common.env
       - ldap.env
     logging:
       driver: json-file
@@ -22,7 +21,7 @@ services:
   mariadb:
     image: mariadb
     env_file:
-      - .envx
+      - mariadb.env
     logging:
       driver: json-file
       options:
@@ -37,9 +36,9 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - ${MARIADB_PATH:-/opt/dcm4chee-arc/mysql}:/var/lib/mysql
   keycloak:
-    image: dcm4che/keycloak:23.0.3
+    image: dcm4che/keycloak:24.0.2
     env_file:
-      - .envx
+      - ./keycloak.env
     logging:
       driver: json-file
       options:
@@ -61,7 +60,6 @@ services:
   db:
     image: dcm4che/postgres-dcm4chee:16.2-32
     env_file:
-      - ./common.env
       - ./db.env
     logging:
       driver: json-file
@@ -79,7 +77,7 @@ services:
   arc:
     image: dcm4che/dcm4chee-arc-psql:5.31.2-secure-ui
     env_file:
-      - .envx
+      - arc.env
     networks:
       - arc-net
     ports:
