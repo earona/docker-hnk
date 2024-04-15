@@ -75,7 +75,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - ${POSTGRES_PATH:-/opt/dcm4chee-arc/db}:/var/lib/postgresql/data
   arc:
-    image: dcm4che/dcm4chee-arc-psql:5.31.2-secure-ui
+    image: dcm4che/dcm4chee-arc-psql:5.32.0-secure
     env_file:
       - arc.env
     networks:
