@@ -36,7 +36,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - ${MARIADB_PATH:-/opt/dcm4chee-arc/mysql}:/var/lib/mysql
   keycloak:
-    image: dcm4che/keycloak:24.0.2
+    image: dcm4che/keycloak:23.0.7
     env_file:
       - keycloak.env
     logging:
