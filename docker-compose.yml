@@ -75,14 +75,14 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - ${POSTGRES_PATH:-/opt/dcm4chee-arc/db}:/var/lib/postgresql/data
   arc:
-    image: dcm4che/dcm4chee-arc-psql:5.32.0-secure
+    image: dcm4che/dcm4chee-arc-psql:5.32.0
     env_file:
       - arc.env
     networks:
       - arc-net
     ports:
-      - "8080:8080"
-      - "8443:8443"
+      - "80:80"
+      - "443:443"
       - "9990:9990"
       - "9993:9993"
       - "11112:11112"
