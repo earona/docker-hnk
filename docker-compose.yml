@@ -38,7 +38,7 @@ services:
   keycloak:
     image: dcm4che/keycloak:24.0.2
     env_file:
-      - ./keycloak.env
+      - keycloak.env
     logging:
       driver: json-file
       options:
