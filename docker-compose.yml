@@ -1,4 +1,4 @@
-name: hospital_nestor_kirchner
+#name: hospital_nestor_kirchner
 
 services:
   ldap:
@@ -36,7 +36,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - ${MARIADB_PATH:-/opt/dcm4chee-arc/mysql}:/var/lib/mysql
   keycloak:
-    image: dcm4che/keycloak:23.0.7
+    image: dcm4che/keycloak:24.0.1
     env_file:
       - keycloak.env
     logging:
@@ -58,7 +58,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - ${KEYCLOAK_PATH:-/opt/dcm4chee-arc/keycloak}:/opt/keycloak/data
   db:
-    image: dcm4che/postgres-dcm4chee:16.2-32
+    image: dcm4che/postgres-dcm4chee:15.4-31
     env_file:
       - ./db.env
     logging:
@@ -75,7 +75,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - ${POSTGRES_PATH:-/opt/dcm4chee-arc/db}:/var/lib/postgresql/data
   arc:
-    image: dcm4che/dcm4chee-arc-psql:5.32.0
+    image: dcm4che/dcm4chee-arc-psql:5.31.2-secure-ui
     env_file:
       - arc.env
     networks:
